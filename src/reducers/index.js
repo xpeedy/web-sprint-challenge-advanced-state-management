@@ -1,11 +1,34 @@
 
+import {API_CALL_START,API_CALL_FINISH,ADD_NEW_SMURF,ERROR_TEXT} from "../actions"
+
 export const initialState = {
+    Smurfslist: [],
+    loading: false,
+    error: "",
 }
 
-const reducer = ()=>{
+const reducer = (state = initialState, action)=>{
+    switch(action.type) {
+        case API_CALL_START:
+            return{...state,
+                loading: true
+            }
+        case API_CALL_FINISH:
+        return{...state,
+            Smurfslist:action.payload,
+            loading: false,
+        }
+        case ADD_NEW_SMURF:
+            return{}
+        case ERROR_TEXT:
+        return{}
+        default:
+            return state
+    }
 }
 
 export default reducer;
+
 
 //Task List:
 //1. Add in the initialState needed to hold: 
