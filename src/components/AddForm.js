@@ -9,28 +9,31 @@ class AddForm extends React.Component {
     }
 
     handleChange = (evt) => {
-        this.setState({inputValue:evt.target.value})
-    //     this.setState({
-    //         name:evt.target.value,
-    //         position:evt.target.value,
-    //         nickname:evt.target.value,
-    //         description:evt.target.value,
-    //     })
-     }
+        // this.setState({...state,inputValue,[evt.target.name]:evt.target.value})
+        this.setState({...this.state,
+            [evt.target.name]:evt.target.value,
+            [evt.target.name]:evt.target.value,
+            // nickname:evt.target.value,
+            // description:evt.target.value,
+        })
+    }
     
 
     render() {
-        console.log(this.state.name)
+        console.log(this.state)
         // console.log(this.state);
         return(<section>
             <h2>Add Smurf</h2>
             <form>
                 <div className="form-group">
-                    <label htmlFor="name">Name:
-                    <input onChange={this.handleChange} name="name" id="name" value={this.state.inputValue}/></label><br/>
-                    <label htmlFor="position">position:
-                    <input onChange={this.handleChange} position="position" id="position" value={this.state.inputValue}/></label><br/>
-                    
+                    <label htmlFor="name">Name:</label><br/>
+                    <input onChange={this.handleChange} name="name" id="name" value={this.state.name}/>
+                    <label htmlFor="position">position:</label><br/>
+                    <input onChange={this.handleChange} name="position" id="position" value={this.state.position}/>
+                    <label htmlFor="nickname">nickname:</label><br/>
+                    <input onChange={this.handleChange} name="nickname" id="nickname" value={this.state.nickname}/>
+                    <label htmlFor="description">description:</label><br/>
+                    <input onChange={this.handleChange} name="description" id="description" value={this.state.description}/>
                 </div>
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
