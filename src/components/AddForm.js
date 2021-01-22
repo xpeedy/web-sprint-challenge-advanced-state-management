@@ -1,30 +1,45 @@
 import React from 'react';
+import  { fetchSmurfs, addSmurf } from "../actions"
+import { connect } from 'react-redux';
 
 class AddForm extends React.Component {
-    state= {
-        name: "",
-        position: "",
-        nickname: "",
-        description: "",
+    constructor(props){
+        super(props)
+        this.state= {
+            name: "",
+            position: "",
+            nickname: "",
+            description: "",
+        }
     }
-
+    
+    componentDidMount(){
+        this.props.fetchSmurfs()
+    } 
+        
     handleChange = (evt) => {
         // this.setState({...state,inputValue,[evt.target.name]:evt.target.value})
         this.setState({...this.state,
             [evt.target.name]:evt.target.value,
-            [evt.target.name]:evt.target.value,
-            // nickname:evt.target.value,
-            // description:evt.target.value,
         })
     }
-    
+     handleSubmit = (evt) => {
+         evt.preventDefault()
+         const newSmurf = {...this.state};
+         this.props.addSmurf(newSmurf)
+        //  this.setState({this.state
+        //     {
+        //         name: "",
+        //         position: "",
+        //         nickname: "",
+        //         description: "",})
+    }
 
     render() {
-        console.log(this.state)
         // console.log(this.state);
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
                     <input onChange={this.handleChange} name="name" id="name" value={this.state.name}/>
@@ -43,7 +58,16 @@ class AddForm extends React.Component {
     }
 }
 
-export default AddForm;
+const mapStateToProps = state => {
+    // console.log(state.smurfList)
+    return{
+        smurfList: state.smurfList,
+        loading: state.loading,
+        error: state.error,
+    }
+}
+
+export default connect(mapStateToProps,{fetchSmurfs,addSmurf})(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
