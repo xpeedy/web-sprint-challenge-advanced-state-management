@@ -32,7 +32,7 @@ export const addSmurf = (newSmurf) => (dispatch) => {
     });
 };
 
-export const errrorText = () => (dispatch) => {
+export const errorText = () => (dispatch) => {
   dispatch({ type: ERROR_TEXT });
 };
 //Task List:

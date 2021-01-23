@@ -1,5 +1,5 @@
 import React from 'react';
-import  { fetchSmurfs, addSmurf } from "../actions"
+import  { fetchSmurfs, addSmurf, errorText } from "../actions"
 import { connect } from 'react-redux';
 
 class AddForm extends React.Component {
@@ -22,12 +22,17 @@ class AddForm extends React.Component {
         this.setState({...this.state,
             [evt.target.name]:evt.target.value,
         })
+        
     }
      handleSubmit = (evt) => {
          evt.preventDefault()
          const newSmurf = {...this.state};
          this.props.addSmurf(newSmurf)
-        
+        //  this.setState({...this.state,[evt.target.value]: ""})
+    }
+
+    handleErrors = () => {
+        this.props.errorText()
     }
 
     render() {
@@ -46,7 +51,7 @@ class AddForm extends React.Component {
                     <input onChange={this.handleChange} name="description" id="description" value={this.state.description}/>
                 </div>
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
+                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.handleErrors}</div>
                 <button>Submit Smurf</button>
             </form>
         </section>);
@@ -62,7 +67,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{fetchSmurfs,addSmurf})(AddForm);
+export default connect(mapStateToProps,{fetchSmurfs,addSmurf,errorText})(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

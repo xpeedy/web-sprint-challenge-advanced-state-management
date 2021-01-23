@@ -23,7 +23,21 @@ const reducer = (state = initialState, action)=>{
                 smurfList:[...state.smurfList,action.payload],
             }
         case ERROR_TEXT:
-        return{}
+        return{...state,
+            error:state.smurfList.map((smurf) =>{
+                if(smurf.name === ""){
+                    return "need name"
+                }
+                else if (smurf.nickname === ""){
+                    return "need nickname"
+                }
+                else if (smurf.nickname === ""){
+                    return "need position"
+                }
+                else {return state}  
+            })
+
+        }
         default:
             return state
     }
