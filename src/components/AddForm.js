@@ -13,9 +13,9 @@ class AddForm extends React.Component {
         }
     }
     
-    componentDidMount(){
-        this.props.fetchSmurfs()
-    } 
+    // componentDidMount(){
+    //     this.props.fetchSmurfs()
+    // } 
         
     handleChange = (evt) => {
         // this.setState({...state,inputValue,[evt.target.name]:evt.target.value})
@@ -27,12 +27,7 @@ class AddForm extends React.Component {
          evt.preventDefault()
          const newSmurf = {...this.state};
          this.props.addSmurf(newSmurf)
-        //  this.setState({this.state
-        //     {
-        //         name: "",
-        //         position: "",
-        //         nickname: "",
-        //         description: "",})
+        
     }
 
     render() {

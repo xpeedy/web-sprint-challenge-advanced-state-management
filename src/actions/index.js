@@ -7,13 +7,13 @@ export const ERROR_TEXT = "ERROR_TEXT";
 
 export const fetchSmurfs = () => (dispatch) => {
   dispatch({ type: API_CALL_START });
-  console.log(dispatch({ type: API_CALL_START }));
+//   console.log(dispatch({ type: API_CALL_START }));
   axios
     .get("http://localhost:3333/smurfs")
     .then((res) => {
     //   console.log(res.data.data);
       dispatch({ type: API_CALL_FINISH, payload: res.data });
-      console.log(dispatch({ type: API_CALL_FINISH, payload: res.data }));
+    //   console.log(dispatch({ type: API_CALL_FINISH, payload: res.data }));
     })
     .catch((err) => {
       console.log(err);
@@ -25,7 +25,7 @@ export const addSmurf = (newSmurf) => (dispatch) => {
   axios
     .post("http://localhost:3333/smurfs", newSmurf)
     .then((res) => {
-      console.log(res.data);
+    //   console.log(res.data);
     })
     .catch((err) => {
       console.log(err);

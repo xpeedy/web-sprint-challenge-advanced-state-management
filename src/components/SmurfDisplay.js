@@ -1,5 +1,6 @@
 import React from 'react';
 import { fetchSmurfs } from "../actions"
+import Smurf from "./Smurf";
 import { connect } from 'react-redux';
 
 export class SmurfDisplay extends React.Component {
@@ -12,8 +13,10 @@ export class SmurfDisplay extends React.Component {
         
         const { smurfList } = this.props;
         console.log(smurfList)
+        
+        console.log(this.props)
         return(<div>
-            {smurfList}
+            <Smurf />
         </div>)
     }
 }
@@ -21,8 +24,7 @@ export class SmurfDisplay extends React.Component {
 const mapStateToProps = state => {
     return{
         smurfList: state.smurfList,
-        loading: state.loading,
-        error: state.error,
+        
     }
 }
 

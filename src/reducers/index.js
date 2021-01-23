@@ -20,7 +20,7 @@ const reducer = (state = initialState, action)=>{
         }
         case ADD_NEW_SMURF:
             return{...state,
-                smurfList:[state.smurfList,action.payload],
+                smurfList:[...state.smurfList,action.payload],
             }
         case ERROR_TEXT:
         return{}
