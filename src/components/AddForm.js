@@ -1,5 +1,5 @@
 import React from 'react';
-import  { fetchSmurfs, addSmurf, errorText } from "../actions"
+import  { fetchSmurfs, addSmurf } from "../actions"
 import { connect } from 'react-redux';
 
 class AddForm extends React.Component {
@@ -28,15 +28,29 @@ class AddForm extends React.Component {
          evt.preventDefault()
          const newSmurf = {...this.state};
          this.props.addSmurf(newSmurf)
+         this.setState({...this.state,
+            name: "",
+            position: "",
+            nickname: "",
+            description: "",   
+        })
+        //  this.props.smurfList.filter((smurf) =>{
+        //      if(smurf.name === newSmurf.name){
+        //          return <div>{this.props.error[3]}</div>
+        //      }
+        //      else {return this.props.addSmurf(newSmurf)}
+        //  })
+        //  if(newSmurf.name in this.props.smurfList){
+
+        //  }
+         
         //  this.setState({...this.state,[evt.target.value]: ""})
     }
-
-    handleErrors = () => {
-        this.props.errorText()
-    }
+    
 
     render() {
-        // console.log(this.state);
+        
+        console.log("im here",this.state.name);
         return(<section>
             <h2>Add Smurf</h2>
             <form onSubmit={this.handleSubmit}>
@@ -50,8 +64,12 @@ class AddForm extends React.Component {
                     <label htmlFor="description">description:</label><br/>
                     <input onChange={this.handleChange} name="description" id="description" value={this.state.description}/>
                 </div>
-
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.handleErrors}</div>
+                {this.state.name === ""?  <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error[0]}</div> : ""}
+                {this.state.nickname === ""?  <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error[1]}</div> : ""}
+                {this.state.position === ""?  <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error[2]}</div> : ""}
+                 {/* <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error:</div> */}
+                 {}
+               
                 <button>Submit Smurf</button>
             </form>
         </section>);
@@ -59,7 +77,7 @@ class AddForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-    // console.log(state.smurfList)
+    console.log(state.error)
     return{
         smurfList: state.smurfList,
         loading: state.loading,
@@ -67,7 +85,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps,{fetchSmurfs,addSmurf,errorText})(AddForm);
+export default connect(mapStateToProps,{fetchSmurfs,addSmurf})(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
