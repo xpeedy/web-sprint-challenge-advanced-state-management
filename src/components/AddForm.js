@@ -27,21 +27,30 @@ class AddForm extends React.Component {
      handleSubmit = (evt) => {
          evt.preventDefault()
          const newSmurf = {...this.state};
-         this.props.smurfList.filter((smurf) =>{
-             if(smurf.name === newSmurf.name){
-                 return this.props.error[3]
-             }
-             else {return this.props.addSmurf(newSmurf)}
-         })
+         this.props.addSmurf(newSmurf)
+         this.setState({...this.state,
+            name: "",
+            position: "",
+            nickname: "",
+            description: "",   
+        })
+        //  this.props.smurfList.filter((smurf) =>{
+        //      if(smurf.name === newSmurf.name){
+        //          return <div>{this.props.error[3]}</div>
+        //      }
+        //      else {return this.props.addSmurf(newSmurf)}
+        //  })
         //  if(newSmurf.name in this.props.smurfList){
 
         //  }
          
         //  this.setState({...this.state,[evt.target.value]: ""})
     }
+    
 
     render() {
-        console.log(this.state.name);
+        
+        console.log("im here",this.state.name);
         return(<section>
             <h2>Add Smurf</h2>
             <form onSubmit={this.handleSubmit}>
@@ -59,6 +68,7 @@ class AddForm extends React.Component {
                 {this.state.nickname === ""?  <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error[1]}</div> : ""}
                 {this.state.position === ""?  <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error[2]}</div> : ""}
                  {/* <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error:</div> */}
+                 {}
                
                 <button>Submit Smurf</button>
             </form>
