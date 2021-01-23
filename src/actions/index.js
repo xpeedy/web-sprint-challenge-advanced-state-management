@@ -1,43 +1,42 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const API_CALL_START = "API_CALL_START"
-export const API_CALL_FINISH = "API_CALL_FINISH"
-export const ADD_NEW_SMURF = "ADD_NEW_SMURF"
-export const ERROR_TEXT = "ERROR_TEXT"
+export const API_CALL_START = "API_CALL_START";
+export const API_CALL_FINISH = "API_CALL_FINISH";
+export const ADD_NEW_SMURF = "ADD_NEW_SMURF";
+export const ERROR_TEXT = "ERROR_TEXT";
 
-const fetchSmurfs = () => (dispatch) => {
-    dispatch({ type: API_CALL_START });
-    console.log(dispatch({ type: API_CALL_START }));
-    axios
-        .get('http://localhost:3333/smurfs')
-        .then((res) => {
-            console.log(res.data)
-            dispatch({ type: API_CALL_FINISH, payload: res.data});
-            console.log(dispatch({ type: API_CALL_FINISH, payload: res.data}))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    
-}
-
-const addSmurf = (name) => (dispatch) =>{
-    dispatch({ type: ADD_NEW_SMURF, payload:name})
-    axios.
-    post('http://localhost:3333/smurfs')
+export const fetchSmurfs = () => (dispatch) => {
+  dispatch({ type: API_CALL_START });
+//   console.log(dispatch({ type: API_CALL_START }));
+  axios
+    .get("http://localhost:3333/smurfs")
     .then((res) => {
-        console.log(res)
+    //   console.log(res.data.data);
+      dispatch({ type: API_CALL_FINISH, payload: res.data });
+    //   console.log(dispatch({ type: API_CALL_FINISH, payload: res.data }));
     })
     .catch((err) => {
-        console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 
-const errrorText = dispatch =>{
-    dispatch({ type:ERROR_TEXT, })
-}
+export const addSmurf = (newSmurf) => (dispatch) => {
+  dispatch({ type: ADD_NEW_SMURF, payload: newSmurf });
+  axios
+    .post("http://localhost:3333/smurfs", newSmurf)
+    .then((res) => {
+    //   console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const errorText = () => (dispatch) => {
+  dispatch({ type: ERROR_TEXT });
+};
 //Task List:
-//1. Add fetch smurfs action: 
+//1. Add fetch smurfs action:
 //              - fetch and return initial list of smurfs
 //              - dispatch actions that indicate if we are waiting for a server response
 //              - dispatch an error text action if an error is returned from the server

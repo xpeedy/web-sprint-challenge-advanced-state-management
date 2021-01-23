@@ -2,7 +2,7 @@
 import {API_CALL_START,API_CALL_FINISH,ADD_NEW_SMURF,ERROR_TEXT} from "../actions"
 
 export const initialState = {
-    Smurfslist: [],
+    smurfList: [],
     loading: false,
     error: "",
 }
@@ -15,13 +15,29 @@ const reducer = (state = initialState, action)=>{
             }
         case API_CALL_FINISH:
         return{...state,
-            Smurfslist:action.payload,
+            smurfList:action.payload,
             loading: false,
         }
         case ADD_NEW_SMURF:
-            return{}
+            return{...state,
+                smurfList:[...state.smurfList,action.payload],
+            }
         case ERROR_TEXT:
-        return{}
+        return{...state,
+            error:state.smurfList.map((smurf) =>{
+                if(smurf.name === ""){
+                    return "need name"
+                }
+                else if (smurf.nickname === ""){
+                    return "need nickname"
+                }
+                else if (smurf.nickname === ""){
+                    return "need position"
+                }
+                else {return state}  
+            })
+
+        }
         default:
             return state
     }
